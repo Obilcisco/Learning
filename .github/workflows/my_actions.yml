@@ -32,7 +32,7 @@ jobs:
           echo "Application name is ${{ env.APPLICATION_NAME }}"
                   
       - name: List current folder
-        run : ls -la
+        run : ls -las
         
       - name: Git clone my repo
         uses: actions/checkout@v1
@@ -61,7 +61,7 @@ jobs:
           LOCAL_VAR: "This is Super local Environment variable"
           
       - name: Printing Deployment package
-        run: echodd "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
+        run: echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
         
       - name: Lets test some packages if they are here 1
         run: aws --version
