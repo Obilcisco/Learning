@@ -10,8 +10,6 @@ name: My GitHub Actions Part-1
 env:
   APPLICATION_NAME    : "MyFlask"
   DEPLOY_PACKAGE_NAME : "flask-deploy-ver-${{ github.sha }}
-
-# Controls when the workflow will run
 on:
   push:
     branches: [ "master" ]
