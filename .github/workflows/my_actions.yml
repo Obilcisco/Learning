@@ -6,7 +6,7 @@
 
 #---------------------------------------------------------------
 
-name: My GitHub Actions Part-1
+name: My_GitHub_Actions_Part-1
 env:
   APPLICATION_NAME    : "MyFlask"
   DEPLOY_PACKAGE_NAME : "flask-deploy-ver-${{ github.sha }}"
