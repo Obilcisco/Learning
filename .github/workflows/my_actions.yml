@@ -7,6 +7,9 @@
 #---------------------------------------------------------------
 
 name: My GitHub Actions Part-1
+env:
+  APPLICATION_NAME    : "MyFlask"
+  DEPLOY_PACKAGE_NAME : "flask-deploy-ver-${{ github.sha }}
 
 # Controls when the workflow will run
 on:
@@ -21,13 +24,22 @@ jobs:
     
     steps:
 
-      - name: Print Hello World
-        run: echo "Hello, world!"
+      - name: Print Hello Everyone from Testing
+        run: echo "Hello Everyone from Testing!"
         
       - name: A few axecutes 
         run: |
           echo "Hello Message1"
           echo "Hello Message2"
+          echo "Application name is ${{ env.APPLICATION_NAME }}"
+                  
       - name: List current folder
         run : ls -la
         
+      - name: Git clone my repo
+        uses: actions/checkout@v1
+        
+      - name: List current folder
+        run: ls -la
+    
+  
