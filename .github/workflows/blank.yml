@@ -1,0 +1,44 @@
+# -----------------------------------------------------------------------------
+# GitHub Action Workflow to Deploy Flask App to AWS ElasticBeanstalk
+# 
+# Version                     Date                        Info
+# 1.0                         02.08.2022                  Initial Version
+#
+# Copyrated by Oleg Biletskyi from Denis Astahov ADV-IT (c) 2022
+# -----------------------------------------------------------------------------
+name : CI-CD-Pipeline-to-AWS-ElasticBeanstalk
+env:
+  EB_PACKAGE_S3_BUCKET_NAME : "boi-flask-application-packages"
+  EB_APPLICATION_NAME       : "MyFlask"
+  EB_ENVIRONMENT_NAME       : "MyFlask-env"
+  DEPLOY_PACKAGE_NAME       : "flask_app_${{ github.sha }}"
+  AWS_REGION_NAME           : "eu-central-1"
+  
+on:
+  push:
+    branches:
+      - master
+      
+jobs:
+  my_ci_part:
+    runs: ubuntu-latest
+    
+    steps:
+    - name: Git clone our repo
+      uses: actions/checkout@v3
+      
+    - name: Create ZIP deployment package
+      run : zip -r ${{ env.DEPLOY_PACKAGE_NAME }} ./ -x *.git*
+      
+    - name: Configure my AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id     : ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key : ${{ secrets.AWS_SECRET_KEY }}
+        aws-region            : ${{ env.AWS_REGION_NAME }}
+        
+    - name: Print Happy Message for CI finish
+      run : echo "CI Pipeline part Finished succesfully!"
+      
+        
+        
